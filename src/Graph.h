@@ -11,7 +11,7 @@ class Graph {
 	int key;
 	set<int> keys;
 	map<pair<int, int>, Trust> edges;
-	Node(vector <Graph*>, int key);
+	Graph(vector <Graph*>, int key);
 };
 
 
