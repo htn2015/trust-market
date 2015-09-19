@@ -1,11 +1,13 @@
-#include "Trust.h"
-#include "Node.h"
 #include <iostream>
+
+#include "Client.h"
 
 using namespace std;
 
+
 int main() {
 
-    cout << "Test" << endl;
+    Client client;
 
+    // Execute command here
 }

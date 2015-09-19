@@ -1,3 +1,4 @@
+/**
 #include "Node.h"
 
 Graph::Graph(vector<Graph*> thought, int key) : key(key) {
@@ -6,3 +7,4 @@ Graph::Graph(vector<Graph*> thought, int key) : key(key) {
 	}
 	vector<>
 }
+ **/

@@ -6,6 +6,9 @@
 #include <map>
 #include <set>
 
+#include "Trust.h"
+
+using namespace std;
 
 class Graph {
 	int key;
