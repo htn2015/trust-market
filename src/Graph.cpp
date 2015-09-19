@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include "Trust.h"
 
+/*
 Graph::Graph(vector<Graph*> thought, map<int, Trust> weights, int key) : key(key) {
 	for(vector<Graph*>::iterator i = thought.end(); i<thought.end(); i++){
 		keys.insert(i->keys.begin(), i->keys.end());
@@ -17,3 +18,4 @@ Graph::Graph(vector<Graph*> thought, map<int, Trust> weights, int key) : key(key
 		}
 	}
 }
+*/
