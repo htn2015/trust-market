@@ -1,6 +1,6 @@
 
-#ifndef HTN2015_NODE_H
-#define HTN2015_NODE_H
+#ifndef HTN2015_GRAPH_H
+#define HTN2015_GRAPH_H
 
 #include <vector>
 #include <map>

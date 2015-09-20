@@ -4,19 +4,17 @@
 #include <iostream>
 #include <map>
 
+#include "Node.h"
 #include "KeyPair.h"
 #include "Graph.h"
 
 using namespace std;
 
 
-struct Client {
-    int id;
+struct Client : public Node {
     KeyPair* keypair;
 
-    map<int, Trust> neighbours, known_vendors;
-    Graph* graph;
-
+    map<int, Trust> known_vendors;
 
     Client();
     ~Client();

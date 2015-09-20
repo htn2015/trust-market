@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Graph.h"
 
 #include "Client.h"
 using namespace std;
