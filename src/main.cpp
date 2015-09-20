@@ -7,6 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
+    /*
     if( argc > 1 && strcmp(argv[1], "listen") == 0 ) {
         Socket::listen();
     }
@@ -23,5 +24,6 @@ int main(int argc, char* argv[]) {
                 break;
         }
     }
+     */
 
 }
