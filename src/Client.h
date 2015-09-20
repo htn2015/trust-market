@@ -2,26 +2,24 @@
 #define HTN2015_CLIENT_H
 
 #include <iostream>
-#include <fstream>
+#include <map>
 
 #include "KeyPair.h"
 #include "Graph.h"
 
 using namespace std;
 
-bool is_file(const char*);
 
-class Client {
+struct Client {
+    int id;
+    KeyPair* keypair;
 
-protected:
+    map<int, Trust> neighbours, known_vendors;
+    Graph* graph;
 
-    long id;
-    //KeyPair keypair;
-    //Graph graph;
-
-public:
 
     Client();
+    ~Client();
 
     void scan();
 

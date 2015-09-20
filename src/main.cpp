@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include "Graph.h"
-#include "Trust.h"
+#include "Client.h"
 using namespace std;
 
 
 int main() {
+
+    Client client;
+    /*
 	vector<Graph*> gr;
 	map<int, Trust> tr;
 	Graph* C = new Graph(gr, tr, 12);
@@ -20,5 +22,6 @@ int main() {
 	t.insert(make_pair(2, Trust(0.9,0,0.1)));
 	t.insert(make_pair(3, Trust(0.8,0,0.2)));
 	Graph* D = new Graph(g,t,1);
-	cout << D->edges.find(make_pair(2,12))->second.b << endl;
+	cout << D->edges.find(make_pair(2,12))->second.b << endl; */
+
 }

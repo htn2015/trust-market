@@ -1,17 +1,29 @@
-#ifndef HTN2015_KEYPAIR_H
-#define HTN2015_KEYPAIR_H
+//
+// Created by Andrei on 15-09-20.
+//
+
+#ifndef HTN2015_KEYGEN_H
+#define HTN2015_KEYGEN_H
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+bool is_file(const char*);
 
 struct KeyPair {
-    long pub;
-    long sec;
+    string pub;
+    string sec;
 
-    KeyPair(long, long);
     KeyPair();
 
-    void generate();
-    long encrypt(long message);
-    long decrypt(long message);
+    void gen();
+    string encrypt(string msg);
+    string decrypt(string msg, string sec);
+
 };
 
 
-#endif //HTN2015_KEYPAIR_H
+#endif //HTN2015_KEYGEN_H
