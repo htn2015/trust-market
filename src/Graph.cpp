@@ -28,3 +28,6 @@ Graph::Graph(vector<Graph*>& thought, map<int, Trust>& weights, int key) : key(k
 		}
 	}
 }
+
+
+

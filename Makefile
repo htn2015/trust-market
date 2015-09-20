@@ -1,2 +1,2 @@
 all:
-	@g++ src/*.cpp  src/vendor/*/*.cpp -o bin/client
+	@g++ src/*.cpp  -o bin/client
