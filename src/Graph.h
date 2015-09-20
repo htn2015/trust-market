@@ -11,10 +11,11 @@
 using namespace std;
 
 class Graph {
+public:
 	int key;
 	set<int> keys;
 	map<pair<int, int>, Trust> edges;
-	Graph(vector <Graph*>, int key);
+	Graph(vector<Graph*>&, map<int, Trust>&, int);
 };
 
 

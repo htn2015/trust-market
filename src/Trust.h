@@ -3,11 +3,11 @@
 
 
 struct Trust {
-    int b,d,u;
-    Trust(int x, int y, int z) : b(x), d(y), u(z) {};
+    float b,d,u;
+    Trust(float x, float y, float z) : b(x), d(y), u(z) {};
 
-    Trust recommendation(Trust AB, Trust BC);
-    Trust consensus(Trust Ap, Trust Bp);
+    static Trust recommendation(Trust AB, Trust BC);
+    static Trust consensus(Trust Ap, Trust Bp);
 };
 
 
