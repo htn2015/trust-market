@@ -1,3 +1,3 @@
 #pragma once
 
-#define DATA_FILE "store.db"
+#define DATABSE_FILE "store.db"

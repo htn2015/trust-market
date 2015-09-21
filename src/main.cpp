@@ -1,13 +1,14 @@
 #include <iostream>
 #include "headers/Graph.h"
 
-#include "headers/DB.h"
+#include "headers/Database.h"
 using namespace std;
 
 
 int main() {
 
-	DB* db = DB::get_instance();
+	//char a[] = "store.db";
+	Database db;
 
     //Client client;
     /*
