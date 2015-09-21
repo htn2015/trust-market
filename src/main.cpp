@@ -1,13 +1,15 @@
 #include <iostream>
 #include "Graph.h"
 
-#include "Client.h"
+#include "DB.h"
 using namespace std;
 
 
 int main() {
 
-    Client client;
+	DB* db = DB::get_instance();
+
+    //Client client;
     /*
 	vector<Graph*> gr;
 	map<int, Trust> tr;

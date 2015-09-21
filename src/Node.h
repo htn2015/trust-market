@@ -12,10 +12,10 @@
 #include "Trust.h"
 
 struct Node {
-    int id;
+    long id;
 
     map<int, Trust> neighbours;
-    Graph* graph;
+    Graph* perception;
 
     Node();
     ~Node();

@@ -1,2 +1,3 @@
 all:
-	@g++ src/*.cpp  -o bin/client
+	@g++ src/*.cpp -std=c++11  -o bin/client
+	@ls -l bin/client

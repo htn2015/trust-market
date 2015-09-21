@@ -3,6 +3,9 @@
 
 using namespace std;
 
+Graph::Graph() { }
+
+/*
 Graph::Graph(vector<Graph*>& thought, map<int, Trust>& weights, int key) : key(key) {
 	for(vector<Graph*>::iterator i = thought.begin(); i != thought.end(); i++){
 		keys.insert((*i)->keys.begin(), (*i)->keys.end());
@@ -27,7 +30,7 @@ Graph::Graph(vector<Graph*>& thought, map<int, Trust>& weights, int key) : key(k
 			edges.insert(make_pair(make_pair(*i, *j), value));
 		}
 	}
-}
+}*/
 
 
 

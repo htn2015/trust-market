@@ -15,7 +15,9 @@ public:
 	int key;
 	set<int> keys;
 	map<pair<int, int>, Trust> edges;
-	Graph(vector<Graph*>&, map<int, Trust>&, int);
+
+	Graph();
+	//Graph(vector<Graph*>&, map<int, Trust>&, int);
 };
 
 
