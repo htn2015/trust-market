@@ -1,8 +1,4 @@
-//
-// Created by Andrei on 15-09-20.
-//
-
-#include "KeyPair.h"
+#include "headers/KeyPair.h"
 
 
 bool is_file(const char *fileName) {

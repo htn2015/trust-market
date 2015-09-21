@@ -1,5 +1,5 @@
-#include "Graph.h"
-#include "Trust.h"
+#include "headers/Graph.h"
+#include "headers/Trust.h"
 
 using namespace std;
 

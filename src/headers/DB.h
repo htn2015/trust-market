@@ -1,5 +1,4 @@
-#ifndef HTN2015_DB_H
-#define HTN2015_DB_H
+#pragma once
 
 #include <iostream>
 #include <sqlite3.h>
@@ -18,6 +17,3 @@ private:
 public:
     static DB* get_instance();
 };
-
-
-#endif //HTN2015_DB_H

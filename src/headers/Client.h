@@ -1,5 +1,4 @@
-#ifndef HTN2015_CLIENT_H
-#define HTN2015_CLIENT_H
+#pragma once
 
 #include <iostream>
 #include <map>
@@ -22,6 +21,3 @@ struct Client : public Node {
     void scan();
 
 };
-
-
-#endif //HTN2015_CLIENT_H

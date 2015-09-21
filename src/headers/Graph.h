@@ -1,6 +1,4 @@
-
-#ifndef HTN2015_GRAPH_H
-#define HTN2015_GRAPH_H
+#pragma once
 
 #include <vector>
 #include <map>
@@ -19,6 +17,3 @@ public:
 	Graph();
 	//Graph(vector<Graph*>&, map<int, Trust>&, int);
 };
-
-
-#endif //HTN2015_NODE_H

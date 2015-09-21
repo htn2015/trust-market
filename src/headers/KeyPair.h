@@ -1,9 +1,4 @@
-//
-// Created by Andrei on 15-09-20.
-//
-
-#ifndef HTN2015_KEYGEN_H
-#define HTN2015_KEYGEN_H
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -24,6 +19,3 @@ struct KeyPair {
     string decrypt(string msg, string sec);
 
 };
-
-
-#endif //HTN2015_KEYGEN_H

@@ -1,6 +1,4 @@
-#ifndef HTN2015_TRUST_H
-#define HTN2015_TRUST_H
-
+#pragma once
 
 struct Trust {
     float b,d,u;
@@ -9,6 +7,3 @@ struct Trust {
     static Trust recommendation(Trust AB, Trust BC);
     static Trust consensus(Trust Ap, Trust Bp);
 };
-
-
-#endif //HTN2015_TRUST_H

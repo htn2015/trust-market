@@ -1,9 +1,4 @@
-//
-// Created by Andrei on 15-09-20.
-//
-
-#ifndef HTN2015_NODE_H
-#define HTN2015_NODE_H
+#pragma once
 
 #include <iostream>
 #include <map>
@@ -23,6 +18,3 @@ struct Node {
     void scan();
 
 };
-
-
-#endif //HTN2015_NODE_H

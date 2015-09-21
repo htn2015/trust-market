@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Graph.h"
+#include "headers/Graph.h"
 
-#include "DB.h"
+#include "headers/DB.h"
 using namespace std;
 
 

@@ -1,9 +1,5 @@
-//
-// Created by Andrei on 15-09-20.
-//
-
-#include "_.h"
-#include "DB.h"
+#include "headers/_.h"
+#include "headers/DB.h"
 
 DB* DB::instance = nullptr;
 

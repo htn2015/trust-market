@@ -1,4 +1,4 @@
-#include "Trust.h"
+#include "headers/Trust.h"
 
 
 Trust Trust::recommendation(Trust AB, Trust BC){
