@@ -15,7 +15,33 @@ void Database::_prepare( const string& sql ) {
     if( sqlite3_prepare_v2( _db, sql.c_str(), -1, &_stmt, nullptr ) != SQLITE_OK ) {
         throw_error();
     }
+    _current_param = 1;
 }
+
+void Database::bind( const string& param ) {
+    if( sqlite3_bind_text( _stmt, _current_param, param.c_str(), -1, SQLITE_TRANSIENT ) != SQLITE_OK ) {
+        throw_error( "Binding error" );
+    }
+
+    _current_param++;
+}
+
+void Database::bind( const int param ) {
+    if( sqlite3_bind_int( _stmt, _current_param, param ) != SQLITE_OK ) {
+        throw_error( "Binding error" );
+    }
+
+    _current_param++;
+}
+
+void Database::bind( const float& param ) {
+    if( sqlite3_bind_double( _stmt, _current_param, double(param) ) != SQLITE_OK ) {
+        throw_error( "Binding error" );
+    }
+
+    _current_param++;
+}
+
 
 void Database::_extract( void_function callback, bool single = false ) {
     int result;
@@ -56,9 +82,13 @@ Database::operator bool() const {
     return _connected;
 }
 
-void Database::operator<<( const string& sql ) {
-    _prepare( sql );
+istream& operator>>( istream& is, Database& db ) {
+    string sql;
+    is >> sql;
+    db._prepare( sql );
+    return is;
 }
+
 
 sqlite3_int64 Database::inserted_id() const {
     return sqlite3_last_insert_rowid( _db );

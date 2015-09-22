@@ -18,6 +18,7 @@ class Database {
 protected:
     sqlite3* _db;
     sqlite3_stmt* _stmt;
+    int _current_param;
 
     bool _connected;
 
@@ -32,10 +33,12 @@ public:
     void throw_error();
     void throw_error( const char* );
 
-    operator bool() const;
-    void operator<<( const string& );
+    void bind( const string& );
+    void bind( const int );
+    void bind( const float& );
 
+    operator bool() const;
+    friend istream& operator>>( istream&, Database& );
 
     sqlite3_int64 inserted_id() const;
-
 };
