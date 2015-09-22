@@ -40,6 +40,10 @@ void Database::_extract( void_function callback, bool single = false ) {
     _stmt = nullptr;
 }
 
+void Database::_extract_single( void_function callback ) {
+    _extract( callback, true );
+}
+
 void Database::throw_error() {
     throw runtime_error( sqlite3_errmsg( _db ) );
 }

@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 struct Client : public Node {
     KeyPair* keypair;
 
@@ -19,5 +18,6 @@ struct Client : public Node {
     ~Client();
 
     void scan();
+    void send_graph( int );
 
 };

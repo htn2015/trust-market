@@ -22,8 +22,8 @@ protected:
     bool _connected;
 
     void _prepare( const string& );
-
     void _extract( void_function, bool );
+    void _extract_single( void_function );
 
 public:
     Database(const char* db_name = DATABSE_FILE);
@@ -35,5 +35,7 @@ public:
     operator bool() const;
     void operator<<( const string& );
 
+
     sqlite3_int64 inserted_id() const;
+
 };
