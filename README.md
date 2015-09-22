@@ -7,6 +7,15 @@ The trustworthiness of a node is computed using [a simple algebra of trust](http
 To do
 ======
 
-* Client program
+* Client program base
+	* Generating key pair (RSA)
+	* Storing data (SQLite)
+	* Communication between clients (Sockets)
+* Trust Algorithm
+	* Scan network and build graph
+	* Retrieve trustworthiness
+	* Connect to vendors
+	* Review transactions
+	* Update weights
 * Simulation demonstrating the evolution of the network
-* Visualization and GUI (if time allows)
+* GUI client
