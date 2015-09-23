@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "headers/Graph.h"
 
 #include "headers/Database.h"
@@ -9,6 +10,11 @@ int main() {
 
 	//char a[] = "store.db";
 	Database db;
+	string sql = "create table if not exists user ("
+			"   _id integer primary key autoincrement not null,"																						"   weight real"
+			");";
+
+	db.execute(sql);
 
     //Client client;
     /*

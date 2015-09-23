@@ -11,9 +11,16 @@ Database::~Database() {
     }
 }
 
-void Database::_prepare( const string& sql ) {
-    if( sqlite3_prepare_v2( _db, sql.c_str(), -1, &_stmt, nullptr ) != SQLITE_OK ) {
+
+void Database::execute(const string& sql, int (*callback)(void*,int,char**,char**), void* param ){
+    if( sqlite3_exec( _db, sql.c_str(), callback, param, &error_message) != SQLITE_OK ) {
         throw_error();
+    }
+}
+
+void Database::prepare( const string& sql ) {
+    if( sqlite3_prepare_v2( _db, sql.c_str(), -1, &_stmt, nullptr ) != SQLITE_OK ) {
+        throw_error( error_message );
     }
     _current_param = 1;
 }
@@ -43,7 +50,7 @@ void Database::bind( const float& param ) {
 }
 
 
-void Database::_extract( void_function callback, bool single = false ) {
+void Database::extract( void_function callback, bool single = false ) {
     int result;
 
     while( (result = sqlite3_step(_stmt)) == SQLITE_ROW ) {
@@ -66,8 +73,8 @@ void Database::_extract( void_function callback, bool single = false ) {
     _stmt = nullptr;
 }
 
-void Database::_extract_single( void_function callback ) {
-    _extract( callback, true );
+void Database::extract_single( void_function callback ) {
+    extract( callback, true );
 }
 
 void Database::throw_error() {
@@ -85,7 +92,7 @@ Database::operator bool() const {
 istream& operator>>( istream& is, Database& db ) {
     string sql;
     is >> sql;
-    db._prepare( sql );
+    db.execute( sql );
     return is;
 }
 
