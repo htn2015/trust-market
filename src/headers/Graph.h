@@ -1,18 +1,27 @@
 #pragma once
 
 #include <vector>
-#include <map>
-#include <set>
+#include <string>
+#include <unordered_map>
+#include "Node.h"
 
 #include "Trust.h"
 
 using namespace std;
 
+struct Node;
+
+struct Edge {
+	Node& from;
+	Node& to;
+	Trust t;
+};
+
 class Graph {
 public:
 	int key;
-	set<int> keys;
-	map<pair<int, int>, Trust> edges;
+	unordered_map<int, Node> nodes;
+	unordered_map<int, Edge> edges;
 
 	Graph();
 	//Graph(vector<Graph*>&, map<int, Trust>&, int);

@@ -5,7 +5,6 @@
 #include <sstream>
 #include <stdexcept>
 #include <sqlite3.h>
-#include <functional>
 
 #include "_.h"
 
@@ -13,7 +12,7 @@ using namespace std;
 
 class Database {
 protected:
-    stringstream current_request;
+    stringstream _current_request, _log;
 
     sqlite3* _db;
     sqlite3_stmt* _stmt;

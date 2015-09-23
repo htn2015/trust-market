@@ -10,11 +10,18 @@ Database::~Database() {
         sqlite3_close_v2( _db );
         _db = nullptr;
     }
+
+    #ifdef DEV
+        string log_str;
+        cout << "DATABASE LOG: " << endl;
+        while(getline(_log, log_str))
+            cout << "\t" << log_str << endl << endl;
+    #endif
 }
 
 void Database::_generate() {
     execute(
-        "create table if not exists nodes ("
+        "create table if not exists graph_nodes ("
             "_id integer primary key,"
             "pub_key text,"
             "address text,"
@@ -22,7 +29,7 @@ void Database::_generate() {
             "my_demerit real,"
             "my_certainty real"
         ");"
-        "create table if not exists edges ("
+        "create table if not exists graph_edges ("
             "_id integer primary key,"
             "from_node integer,"
             "to_node integer,"
@@ -38,14 +45,20 @@ void Database::_generate() {
             "my_demerit real,"
             "my_certainty real,"
             "is_vendor boolean"
+        ");"
     );
 }
 
 void Database::execute(const char* sql, int (*callback)(void*,int,char**,char**), void* param ){
     if(strlen(sql) == 0)
-        sql = current_request.str().c_str();
+        sql = _current_request.str().c_str();
 
-    cout << "EXECUTING: " << string(sql) << endl;
+    // Log each query (if multiple, they are separated by ;)
+    stringstream sql_stream(sql);
+    string segment;
+    while(getline(sql_stream, segment, ';')) {
+        _log << segment << endl;
+    }
 
     if( sqlite3_exec( _db, sql, callback, param, &_error_message) != SQLITE_OK ) {
         throw_error(_error_message);
@@ -69,20 +82,20 @@ void Database::throw_error( const char* msg ) {
 }
 
 Database& operator<<( Database& db, const char* sql ) {
-    db.current_request << sql;
+    db._current_request << sql;
 
     if( sql[ strlen(sql) - 1 ] == ';' ) {
         db.execute();
-        db.current_request.str("");
-        db.current_request.clear();
+        db._current_request.str("");
+        db._current_request.clear();
     }
 
     return db;
 }
 
 template <typename T>
-Database& operator<<( Database& db, const T id ) {
-    db.current_request << id;
+Database& operator<<( Database& db, const T token ) {
+    db._current_request << token;
 
     return db;
 }
