@@ -1,19 +1,15 @@
 #pragma once
 
 #include <iostream>
-
 #include <string>
 #include <sstream>
-#include <functional>
 #include <stdexcept>
-#include <ctime>
+#include <sqlite3.h>
+#include <functional>
 
 #include "_.h"
-#include <sqlite3.h>
 
 using namespace std;
-
-typedef function<void(void)> void_function;
 
 class Database {
 protected:
@@ -23,13 +19,18 @@ protected:
     sqlite3_stmt* _stmt;
 
     bool _connected;
-    char* error_message;
+    char* _error_message;
+
+    void _generate();
 
 public:
     Database(const char* db_name = DATABSE_FILE);
     ~Database();
 
+    void execute( const char*, int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
     void execute( const string&, int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
+
+    sqlite3_int64 inserted_id() const;
 
     void throw_error();
     void throw_error( const char* );
@@ -39,6 +40,4 @@ public:
     template <typename T>
     friend Database& operator<<( Database&, const T );
     friend Database& operator<<( Database&, const char* );
-
-    sqlite3_int64 inserted_id() const;
 };
