@@ -29,11 +29,6 @@ Database::operator bool() const {
     return _connected;
 }
 
-Database& operator<<( Database& db, int id ) {
-    db.current_request << id;
-
-    return db;
-}
 
 Database& operator<<( Database& db, const char* sql ) {
     db.current_request << sql;
@@ -49,6 +44,18 @@ Database& operator<<( Database& db, const char* sql ) {
 
     return db;
 }
+
+template <typename T>
+Database& operator<<( Database& db, const T id ) {
+    db.current_request << id;
+
+    return db;
+}
+
+template Database& operator<<<int>( Database&, const int);
+template Database& operator<<<long>( Database&, const long);
+template Database& operator<<<float>( Database&, const float);
+template Database& operator<<<double>( Database&, const double);
 
 
 sqlite3_int64 Database::inserted_id() const {

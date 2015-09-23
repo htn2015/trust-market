@@ -36,7 +36,8 @@ public:
 
     operator bool() const;
 
-    friend Database& operator<<( Database&, int );
+    template <typename T>
+    friend Database& operator<<( Database&, const T );
     friend Database& operator<<( Database&, const char* );
 
     sqlite3_int64 inserted_id() const;
