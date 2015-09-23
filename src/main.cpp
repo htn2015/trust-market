@@ -1,20 +1,30 @@
 #include <iostream>
 #include <sstream>
+#include <functional>
 #include "headers/Graph.h"
 
 #include "headers/Database.h"
 using namespace std;
 
+int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+	for(int i=0; i<argc; ++i) {
+		cout << azColName[i] << " : " << argv[i] << endl;
+	}
+	return 0;
+}
 
 int main() {
 
-	//char a[] = "store.db";
 	Database db;
-	string sql = "create table if not exists user ("
-			"   _id integer primary key autoincrement not null,"																						"   weight real"
-			");";
+	db << "drop table user; create table if not exists user ("
+	"   _id integer primary key autoincrement not null,"
+	" name varchar(256), weight integer"
+	");";
 
-	db.execute(sql);
+	for(int i = 0; i < 200; ++i)
+		db << "insert into user values('" << i << "', 'naaame', '" << i << "');";
+
+	db.execute("select * from user", callback);
 
     //Client client;
     /*

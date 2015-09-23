@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <string>
+#include <sstream>
 #include <functional>
 #include <stdexcept>
 #include <ctime>
@@ -16,9 +17,10 @@ typedef function<void(void)> void_function;
 
 class Database {
 protected:
+    stringstream current_request;
+
     sqlite3* _db;
     sqlite3_stmt* _stmt;
-    int _current_param;
 
     bool _connected;
     char* error_message;
@@ -27,23 +29,15 @@ public:
     Database(const char* db_name = DATABSE_FILE);
     ~Database();
 
+    void execute( const string&, int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
+
     void throw_error();
     void throw_error( const char* );
 
-    void execute( const string&, int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
-
-    void prepare( const string& );
-
-    void bind( const string& );
-    void bind( const int );
-    void bind( const float& );
-
-    void extract( void_function, bool );
-    void extract_single( void_function );
-
     operator bool() const;
 
-    friend istream& operator>>( istream&, Database& );
+    friend Database& operator<<( Database&, int );
+    friend Database& operator<<( Database&, const char* );
 
     sqlite3_int64 inserted_id() const;
 };

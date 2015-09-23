@@ -11,70 +11,10 @@ Database::~Database() {
     }
 }
 
-
 void Database::execute(const string& sql, int (*callback)(void*,int,char**,char**), void* param ){
     if( sqlite3_exec( _db, sql.c_str(), callback, param, &error_message) != SQLITE_OK ) {
         throw_error();
     }
-}
-
-void Database::prepare( const string& sql ) {
-    if( sqlite3_prepare_v2( _db, sql.c_str(), -1, &_stmt, nullptr ) != SQLITE_OK ) {
-        throw_error( error_message );
-    }
-    _current_param = 1;
-}
-
-void Database::bind( const string& param ) {
-    if( sqlite3_bind_text( _stmt, _current_param, param.c_str(), -1, SQLITE_TRANSIENT ) != SQLITE_OK ) {
-        throw_error( "Binding error" );
-    }
-
-    _current_param++;
-}
-
-void Database::bind( const int param ) {
-    if( sqlite3_bind_int( _stmt, _current_param, param ) != SQLITE_OK ) {
-        throw_error( "Binding error" );
-    }
-
-    _current_param++;
-}
-
-void Database::bind( const float& param ) {
-    if( sqlite3_bind_double( _stmt, _current_param, double(param) ) != SQLITE_OK ) {
-        throw_error( "Binding error" );
-    }
-
-    _current_param++;
-}
-
-
-void Database::extract( void_function callback, bool single = false ) {
-    int result;
-
-    while( (result = sqlite3_step(_stmt)) == SQLITE_ROW ) {
-        callback();
-
-        if(single) {
-            if ( (result = sqlite3_step(_stmt)) == SQLITE_ROW )
-                throw_error("Not all rows extracted");
-
-            break;
-        }
-    }
-
-    if( result != SQLITE_DONE )
-        throw_error();
-
-    if( sqlite3_finalize(_stmt) != SQLITE_OK )
-        throw_error();
-
-    _stmt = nullptr;
-}
-
-void Database::extract_single( void_function callback ) {
-    extract( callback, true );
 }
 
 void Database::throw_error() {
@@ -89,11 +29,25 @@ Database::operator bool() const {
     return _connected;
 }
 
-istream& operator>>( istream& is, Database& db ) {
-    string sql;
-    is >> sql;
-    db.execute( sql );
-    return is;
+Database& operator<<( Database& db, int id ) {
+    db.current_request << id;
+
+    return db;
+}
+
+Database& operator<<( Database& db, const char* sql ) {
+    db.current_request << sql;
+
+    if( sql[ strlen(sql) - 1 ] == ';' ) {
+
+        cout << "EXECUTING: " << db.current_request.str() << endl;
+
+        db.execute( db.current_request.str() );
+        db.current_request.str("");
+        db.current_request.clear();
+    }
+
+    return db;
 }
 
 
