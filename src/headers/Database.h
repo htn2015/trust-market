@@ -27,7 +27,7 @@ public:
     Database(const char* db_name = DATABSE_FILE);
     ~Database();
 
-    void execute( const char*, int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
+    void execute( const char* = "", int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
     void execute( const string&, int (*callback)(void*,int,char**,char**) = nullptr, void* param = nullptr );
 
     sqlite3_int64 inserted_id() const;

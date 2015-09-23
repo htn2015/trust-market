@@ -30,10 +30,23 @@ void Database::_generate() {
             "demerit real,"
             "certainty real"
         ");"
+        "create table if not exists neighbours ("
+            "_id integer primary key,"
+            "connected_since datetime,"
+            "address text,"
+            "my_merit real,"
+            "my_demerit real,"
+            "my_certainty real,"
+            "is_vendor boolean"
     );
 }
 
 void Database::execute(const char* sql, int (*callback)(void*,int,char**,char**), void* param ){
+    if(strlen(sql) == 0)
+        sql = current_request.str().c_str();
+
+    cout << "EXECUTING: " << string(sql) << endl;
+
     if( sqlite3_exec( _db, sql, callback, param, &_error_message) != SQLITE_OK ) {
         throw_error(_error_message);
     }
@@ -59,10 +72,7 @@ Database& operator<<( Database& db, const char* sql ) {
     db.current_request << sql;
 
     if( sql[ strlen(sql) - 1 ] == ';' ) {
-
-        cout << "EXECUTING: " << db.current_request.str() << endl;
-
-        db.execute( db.current_request.str() );
+        db.execute();
         db.current_request.str("");
         db.current_request.clear();
     }
